@@ -3,7 +3,7 @@ import { TodoSearch } from './TodoSearch'
 import { TodoList } from './TodoList'
 import { CreateTodoButton } from './CreateTodoButton'
 
-// import './App.css';
+import './App.css';
 
 const todos = [
   {text: "Cortar Cebolla", completed: false},
@@ -14,10 +14,12 @@ const todos = [
 function App() {
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
-      <TodoList todos={todos} />
-      <CreateTodoButton />
+      <main>
+        <TodoCounter />
+        <TodoSearch />
+        <TodoList todos={todos} />
+        <CreateTodoButton />
+      </main>
     </>
   );
 }

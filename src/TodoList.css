@@ -1,0 +1,20 @@
+section {
+    padding: 1rem 0;
+}
+
+section ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section ul li {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: #323232;
+    color: #EAEAEA;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}

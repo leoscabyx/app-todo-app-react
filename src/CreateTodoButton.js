@@ -1,7 +1,10 @@
 
 function CreateTodoButton() {
+    const handleClickButton = () => {
+        alert('Abrir Modal para agregar un TODO')
+    }
     return (
-        <button>+</button>
+        <button onClick={handleClickButton}>+</button>
     )
 }
 
