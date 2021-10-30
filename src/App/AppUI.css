@@ -38,6 +38,7 @@ main button {
   font-weight: 700;
   color: #612938;
   transition: transform 1s;
+  z-index: 1000;
 }
 
 main button:hover {

@@ -1,7 +1,12 @@
+import React from "react"
+import { TodoContext } from '../TodoContext'
 
-function CreateTodoButton() {
+function CreateTodoButton({ setOpenModal }) {
+
+    const { openModal } = React.useContext(TodoContext)
+
     const handleClickButton = () => {
-        alert('Abrir Modal para agregar un TODO')
+        setOpenModal(!openModal)
     }
     return (
         <button onClick={handleClickButton}>+</button>
