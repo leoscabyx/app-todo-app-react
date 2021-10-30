@@ -1,5 +1,9 @@
+import React from "react";
 
-function TodoSearch({ search, setSearch}) {
+import { TodoContext } from '../TodoContext'
+
+function TodoSearch() {
+    const { search, setSearch } = React.useContext(TodoContext)
 
     const handleChangeInput = (event) => {
         console.log(event.target.value)

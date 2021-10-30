@@ -1,11 +1,11 @@
-import { TodoItem } from '../TodoItem'
+
 import './TodoList.css'
 
-function TodoList({todos, completeTodo, deleteTodo}) {
+function TodoList(props) {
     return (
         <section>
             <ul>
-                {todos.map( item => <TodoItem key={item.text} text={item.text} completed={item.completed} onComplete={()=> completeTodo(item.text)} onDelete={() => deleteTodo(item.text)} /> )}
+                {props.children}
             </ul>
         </section>
     )
