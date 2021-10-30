@@ -1,16 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { AppUI } from "./AppUI";
 
-const defaultTodos = [
-  {text: "Cortar Cebolla", completed: false},
-  {text: "Cortar Cebolla 2", completed: false},
-  {text: "Cortar Cebolla 3", completed: true}
-]
+// const defaultTodos = [
+  // {text: "Cortar Cebolla", completed: false},
+  // {text: "Cortar Cebolla 2", completed: false},
+  // {text: "Cortar Cebolla 3", completed: true}
+// ]
+
+function useLocalStorage(itemName, initialValue) {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [item, setItem] = useState(initialValue)
+
+  useEffect( () => {
+    setTimeout( () => {
+      try {
+        const localStorageItem = localStorage.getItem(itemName)
+        let parsedItems
+      
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue))
+          parsedItems = []
+        }else{
+          parsedItems = JSON.parse(localStorageItem)
+        }
+  
+        setItem(parsedItems)
+        setLoading(false)
+      } catch (error) {
+        setError(error)
+      }
+    }, 1000)
+  }, [])
+
+  const saveItem = (newItem) => {
+    try {
+      const stringifiedItem = JSON.stringify(newItem)
+      localStorage.setItem(itemName, stringifiedItem)
+      setItem(newItem)
+    } catch (error) {
+      setError(error)
+    }
+  }
+
+  return {
+    item,
+    saveItem,
+    loading,
+    error
+  }
+}
 
 function App() {
 
-  const [todos, setTodos] = useState(defaultTodos)
+  const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1', [])
+  
   const [search, setSearch] = useState('')
 
   const completedTodos = todos.filter( todo => todo.completed === true).length
@@ -33,18 +78,29 @@ function App() {
     const todoIndex = todos.findIndex( todo => todo.text === text)
     const newTodos = [...todos]
     newTodos[todoIndex].completed = true
-    setTodos(newTodos) 
+    saveTodos(newTodos) 
   }
 
   const deleteTodo = (text) => {
     const todoIndex = todos.findIndex( todo => todo.text === text)
     const newTodos = [...todos]
     newTodos.splice(todoIndex, 1)
-    setTodos(newTodos) 
+    saveTodos(newTodos) 
   }
+
+  // console.log('Render (antes del use effect)')
+  
+  // useEffect( () => {
+  //   console.log('use effect')
+  // }, [totalTodos])
+  
+  // console.log('Render (despues del use effect)')
+
 
   return (
     <AppUI
+      error={error}
+      loading={loading}
       totalTodos={totalTodos}
       completedTodos={completedTodos}
       search={search} 
