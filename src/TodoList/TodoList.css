@@ -19,6 +19,20 @@ section ul li {
     padding: 0 1rem;
 }
 
-section ul li.completed {
+
+
+ul li span:nth-child(2) {
+    width: 100%;
+}
+
+ul li span:nth-child(2).completed {
     text-decoration: line-through;
+}
+
+ul li span:nth-child(1), ul li span:nth-child(3) {
+    align-self: stretch;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

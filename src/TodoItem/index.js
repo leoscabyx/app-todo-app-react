@@ -10,10 +10,10 @@ function TodoItem({text, onComplete, completed, onDelete}) {
     } */
 
     return (
-        <li className={completed ? 'completed' : ''}>
-            <span onClick={onComplete}>✅</span>
-            {text}
-            <span onClick={onDelete}>❎</span>
+        <li>
+            <span onClick={onComplete}>{completed ? '✅' : '⭕'}</span>
+            <span onClick={onComplete} className={completed ? 'completed' : ''}>{text}</span>
+            <span onClick={onDelete}>🗑️</span>
         </li>
     )
 }
